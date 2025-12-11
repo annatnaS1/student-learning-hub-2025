@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AAI Learning Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="container">
+<header>
+  <div class="logo-area">
+    <img src="https://aai.pasco.k12.fl.us/wp-content/uploads/aai/2025/07/AAI_emblem-1280x1280.jpeg" alt="AAI Logo">
+    <div>
+      <h1>AAI Learning Hub</h1>
+      <p>Empowering Archers through knowledge & collaboration</p>
+    </div>
+  </div>
+
+  <nav>
+    <button onclick="showTab('dashboard')">Dashboard</button>
+    <button onclick="showTab('resources')">Resources</button>
+    <button onclick="showTab('calendar-tab')">Calendar & Scheduler</button>
+
+    <!-- Theme toggle -->
+    <div class="theme-toggle" style="margin-left:12px;">
+      <span style="font-size:13px;color:var(--muted);">Dark Mode</span>
+      <div id="themeSwitch" class="switch" role="switch" aria-checked="false" tabindex="0">
+        <div class="knob"></div>
+      </div>
+      <span style="font-size:13px;color:var(--muted);">Light Mode</span>
+    </div>
+  </nav>
+</header>
+
+<!-- DASHBOARD -->
+<section id="dashboard" class="tab-content active">
+  <div class="card">
+    <h2>Student Dashboard</h2>
+    <p>Track your progress and see your completed activities below.</p>
+
+    <div class="dashboard-row">
+      <div>
+        <p><strong>Math Lessons Completed:</strong></p>
+        <div class="progress-bar"><div class="progress-fill" id="math-progress"></div></div>
+        <p><strong>Science Lessons Completed:</strong></p>
+        <div class="progress-bar"><div class="progress-fill" id="science-progress"></div></div>
+        <p><strong>Reading Lessons Completed:</strong></p>
+        <div class="progress-bar"><div class="progress-fill" id="reading-progress"></div></div>
+      </div>
+
+      <div class="achievements-card">
+        <h3>Achievements</h3>
+        <div class="achievements" id="achievements">
+          <!-- badges inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESOURCES -->
+<section id="resources" class="tab-content">
+  <div class="card">
+    <h2>Learning Resources</h2>
+
+    <div class="resource-tabs">
+      <button class="res-tab active" data-sub="math">Math</button>
+      <button class="res-tab" data-sub="science">Science</button>
+      <button class="res-tab" data-sub="reading">Reading</button>
+    </div>
+
+    <!-- quick "Take Quiz" per subject -->
+    <div class="subject-quiz-buttons">
+      <button class="small" data-quiz="quiz-math" onclick="showTab('quiz-math')">Take Math Quiz</button>
+      <button class="small" data-quiz="quiz-science" onclick="showTab('quiz-science')">Take Science Quiz</button>
+      <button class="small" data-quiz="quiz-reading" onclick="showTab('quiz-reading')">Take Reading Quiz</button>
+    </div>
+
+    <!-- MATH -->
+    <div id="math" class="resource-content active">
+      <div class="resource-grid">
+        <div class="resource">
+          <a href="https://www.youtube.com/watch?v=ZxhEMiK8M_0" target="_blank"><h4>8th Grade Math Concepts</h4></a>
+        </div>
+        <div class="resource">
+          <a href="https://www.youtube.com/watch?v=_lxccBUcNaY" target="_blank"><h4>9th Grade Math Concepts</h4></a>
+        </div>
+        <div class="resource">
+          <a href="https://www.youtube.com/watch?v=Veb22xD0Ao0" target="_blank"><h4>10th Grade Math Concepts</h4></a>
+        </div>
+        <div class="resource">
+          <a href="https://www.youtube.com/watch?v=yEPVEfUVrF4" target="_blank"><h4>11th Grade Math Concepts</h4></a>
+        </div>
+        <div class="resource">
+          <a href="https://www.youtube.com/watch?v=5NadGZg4lfI&t=1s" target="_blank"><h4>12th Grade Math Concepts</h4></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCIENCE -->
+    <div id="science" class="resource-content">
+      <div class="resource-grid">
+        <div class="resource"><a href="https://www.youtube.com/watch?v=3tisOnOkwzo" target="_blank"><h4>Biology</h4></a></div>
+        <div class="resource"><a href="https://www.youtube.com/watch?v=ZAqIoDhornk" target="_blank"><h4>Physics</h4></a></div>
+        <div class="resource"><a href="https://www.youtube.com/watch?v=SWbM8rpH2sM" target="_blank"><h4>Earth Science</h4></a></div>
+      </div>
+    </div>
+
+    <!-- READING -->
+    <div id="reading" class="resource-content">
+      <div class="resource-grid">
+        <div class="resource"><h4>Figurative Language</h4><p><a href="https://www.ereadingworksheets.com/figurative-language-worksheets/identifying-figurative-language-ohenry.pdf" class="download">Download PDF</a></p></div>
+        <div class="resource"><h4>Author’s Purpose</h4><p><a href="https://www.ereadingworksheets.com/reading-worksheets/authors-purpose-worksheet-2.pdf" class="download">Download PDF</a></p></div>
+        <div class="resource"><h4>Context Clues</h4><p><a href="https://www.ereadingworksheets.com/reading-worksheets/context-clues/context-clues-worksheet-2-5.pdf" class="download">Download PDF</a></p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- QUIZ PAGES (separate pages in index.html) -->
+<section id="quiz-math" class="tab-content">
+  <div class="card">
+    <button class="small" onclick="showTab('resources')">← Back to Resources</button>
+    <h2>Math Quiz — 3 Questions</h2>
+    <form id="form-quiz-math" class="quiz-form">
+      <ol>
+        <li>
+          <p>1) What is 2 + 3?</p>
+          <label><input type="radio" name="q1" value="0"> 4</label><br>
+          <label><input type="radio" name="q1" value="1"> 5</label><br>
+          <label><input type="radio" name="q1" value="0"> 6</label>
+        </li>
+        <li>
+          <p>2) What is the area of a 2x3 rectangle?</p>
+          <label><input type="radio" name="q2" value="1"> 6</label><br>
+          <label><input type="radio" name="q2" value="0"> 5</label><br>
+          <label><input type="radio" name="q2" value="0"> 9</label>
+        </li>
+        <li>
+          <p>3) What is 10 ÷ 2?</p>
+          <label><input type="radio" name="q3" value="0"> 2</label><br>
+          <label><input type="radio" name="q3" value="1"> 5</label><br>
+          <label><input type="radio" name="q3" value="0"> 10</label>
+        </li>
+      </ol>
+      <button type="submit">Submit Quiz</button>
+    </form>
+
+    <div id="result-quiz-math" class="quiz-result" style="display:none"></div>
+  </div>
+</section>
+
+<section id="quiz-science" class="tab-content">
+  <div class="card">
+    <button class="small" onclick="showTab('resources')">← Back to Resources</button>
+    <h2>Science Quiz — 3 Questions</h2>
+    <form id="form-quiz-science" class="quiz-form">
+      <ol>
+        <li>
+          <p>1) The planet we live on is:</p>
+          <label><input type="radio" name="q1" value="1"> Earth</label><br>
+          <label><input type="radio" name="q1" value="0"> Mars</label><br>
+          <label><input type="radio" name="q1" value="0"> Venus</label>
+        </li>
+        <li>
+          <p>2) Water freezes at what °C?</p>
+          <label><input type="radio" name="q2" value="1"> 0°C</label><br>
+          <label><input type="radio" name="q2" value="0"> 50°C</label><br>
+          <label><input type="radio" name="q2" value="0"> 100°C</label>
+        </li>
+        <li>
+          <p>3) Plants produce oxygen during:</p>
+          <label><input type="radio" name="q3" value="1"> Photosynthesis</label><br>
+          <label><input type="radio" name="q3" value="0"> Respiration</label><br>
+          <label><input type="radio" name="q3" value="0"> Evaporation</label>
+        </li>
+      </ol>
+      <button type="submit">Submit Quiz</button>
+    </form>
+
+    <div id="result-quiz-science" class="quiz-result" style="display:none"></div>
+  </div>
+</section>
+
+<section id="quiz-reading" class="tab-content">
+  <div class="card">
+    <button class="small" onclick="showTab('resources')">← Back to Resources</button>
+    <h2>Reading Quiz — 3 Questions</h2>
+    <form id="form-quiz-reading" class="quiz-form">
+      <ol>
+        <li>
+          <p>1) Figurative language often includes:</p>
+          <label><input type="radio" name="q1" value="1"> Metaphor</label><br>
+          <label><input type="radio" name="q1" value="0"> Calculator</label><br>
+          <label><input type="radio" name="q1" value="0"> Oven</label>
+        </li>
+        <li>
+          <p>2) Author's purpose could be to:</p>
+          <label><input type="radio" name="q2" value="1"> Inform</label><br>
+          <label><input type="radio" name="q2" value="0"> Sing</label><br>
+          <label><input type="radio" name="q2" value="0"> Sleep</label>
+        </li>
+        <li>
+          <p>3) Context clues help you:</p>
+          <label><input type="radio" name="q3" value="1"> Understand word meaning</label><br>
+          <label><input type="radio" name="q3" value="0"> Burn toast</label><br>
+          <label><input type="radio" name="q3" value="0"> Drive a car</label>
+        </li>
+      </ol>
+      <button type="submit">Submit Quiz</button>
+    </form>
+
+    <div id="result-quiz-reading" class="quiz-result" style="display:none"></div>
+  </div>
+</section>
+
+<!-- Calendar Tab -->
+<section id="calendar-tab" class="tab-content">
+  <div class="card">
+    <h2>Event Calendar & Scheduler</h2>
+
+    <form onsubmit="addToCalendar(event)">
+      <label>Event Name</label>
+      <input type="text" id="event-name" placeholder="Enter event name" required>
+
+      <label>Date</label>
+      <input type="date" id="event-date" required>
+
+      <label>Time</label>
+      <input type="time" id="event-time" required>
+
+      <label>Duration (hours)</label>
+      <input type="number" id="event-duration" min="1" max="24" value="1" required>
+
+      <button type="submit">Add Event</button>
+    </form>
+
+    <div id="calendar">
+      <div id="calendar-header"></div>
+      <div id="calendar-days"></div>
+      <div id="events-for-date"></div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2025 Angeline Academy of Innovation — All Rights Reserved</footer>
+</div>
+
+<script>
+/* ---------------- Basic tab/router ---------------- */
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+
+  // scroll to top of container so the quiz/results are visible
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ---------------- Theme toggle logic ---------------- */
+const themeSwitch = document.getElementById('themeSwitch');
+
+function setTheme(isLight){
+  if(isLight){
+    document.body.classList.add('light-mode');
+    themeSwitch.classList.add('on');
+    themeSwitch.setAttribute('aria-checked','true');
+  } else {
+    document.body.classList.remove('light-mode');
+    themeSwitch.classList.remove('on');
+    themeSwitch.setAttribute('aria-checked','false');
+  }
+  localStorage.setItem('aai_theme_light', isLight ? '1' : '0');
+}
+
+function toggleTheme(){
+  const isLight = document.body.classList.contains('light-mode');
+  setTheme(!isLight);
+}
+
+themeSwitch.addEventListener('click', toggleTheme);
+themeSwitch.addEventListener('keydown', (e) => {
+  if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleTheme(); }
+});
+
+function initTheme(){
+  const saved = localStorage.getItem('aai_theme_light');
+  if(saved === '1'){ setTheme(true); return; }
+  if(saved === '0'){ setTheme(false); return; }
+  const prefersLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  setTheme(prefersLight);
+}
+
+/* ---------------- Resource counts & progress logic ---------------- */
+let resourceCounts = { math:0, science:0, reading:0 };
+
+function calcResourceCounts(){
+  resourceCounts = {
+    math: document.querySelectorAll('#math .resource').length || 1,
+    science: document.querySelectorAll('#science .resource').length || 1,
+    reading: document.querySelectorAll('#reading .resource').length || 1
+  };
+}
+
+// Load saved progress or use defaults
+const progressValues = {
+  math: parseFloat(localStorage.getItem('prog_math')) || 0,
+  science: parseFloat(localStorage.getItem('prog_science')) || 0,
+  reading: parseFloat(localStorage.getItem('prog_reading')) || 0
+};
+
+function animateProgressFill(el, from, to) {
+  // add a 'bump' class to create a little scale animation; width transition handled via CSS
+  el.style.width = from + '%';
+  requestAnimationFrame(() => {
+    el.classList.add('bump');
+    el.style.width = to + '%';
+    setTimeout(() => el.classList.remove('bump'), 500);
+  });
+}
+
+function setProgress(subject, value) {
+  progressValues[subject] = Math.min(100, Math.max(0, value));
+  localStorage.setItem(`prog_${subject}`, progressValues[subject]);
+  const el = document.getElementById(subject + '-progress');
+  animateProgressFill(el, parseFloat(el.style.width) || 0, progressValues[subject]);
+  renderAchievementsUI();
+}
+
+/* increment based on number of resources (user requested: 4 resources -> +25%) */
+function incrementProgressByResource(subject) {
+  const increment = 100 / resourceCounts[subject];
+  setProgress(subject, progressValues[subject] + increment);
+}
+
+/* ---------------- Achievements ---------------- */
+const ACHIEVEMENT_DEFS = {
+  math: { id: 'ach_math', name: 'Math Prodigy', desc: 'Pass the Math quiz' },
+  science: { id: 'ach_science', name: 'Science Scholar', desc: 'Pass the Science quiz' },
+  reading: { id: 'ach_reading', name: 'Reading Wiz', desc: 'Pass the Reading quiz' }
+};
+
+function loadAchievements() {
+  const r = {};
+  Object.keys(ACHIEVEMENT_DEFS).forEach(sub => {
+    r[sub] = localStorage.getItem(ACHIEVEMENT_DEFS[sub].id) === '1';
+  });
+  return r;
+}
+
+function awardAchievement(subject) {
+  localStorage.setItem(ACHIEVEMENT_DEFS[subject].id, '1');
+  setProgress(subject, 100); // passing a quiz yields full completion
+  renderAchievementsUI();
+}
+
+function renderAchievementsUI() {
+  const container = document.getElementById('achievements');
+  const got = loadAchievements();
+  container.innerHTML = '';
+  Object.keys(ACHIEVEMENT_DEFS).forEach(key => {
+    const def = ACHIEVEMENT_DEFS[key];
+    const badge = document.createElement('div');
+    badge.className = 'badge' + (got[key] ? ' earned' : '');
+    badge.innerHTML = `<div class="badge-icon">${def.name.charAt(0)}</div><div class="badge-text"><strong>${def.name}</strong><div class="badge-desc">${def.desc}</div></div>`;
+    container.appendChild(badge);
+  });
+}
+
+/* ---------------- Quiz behavior ---------------- */
+function setupQuiz(formId, subject, resultElId) {
+  const form = document.getElementById(formId);
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const data = new FormData(form);
+    let score = 0;
+    for(let [k,v] of data.entries()){
+      score += parseInt(v) || 0;
+    }
+    const resultEl = document.getElementById(resultElId);
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `<h3>Your Score: ${score} / 3</h3>`;
+
+    if(score >= 2){
+      resultEl.innerHTML += `<p>Nice! You passed. Achievement unlocked: <strong>${ACHIEVEMENT_DEFS[subject].name}</strong></p>`;
+      awardAchievement(subject);
+    } else {
+      resultEl.innerHTML += `<p>Not quite — try again. You still earned a small progress boost.</p>`;
+      // add small boost (one resource increment)
+      incrementProgressByResource(subject);
+    }
+
+    // Save quiz attempt
+    localStorage.setItem(`last_quiz_${subject}`, Date.now());
+    // show dashboard button
+    resultEl.innerHTML += `<p><button onclick="showTab('dashboard')">Back to Dashboard</button> <button onclick="showTab('resources')">Back to Resources</button></p>`;
+  });
+}
+
+/* ---------------- Calendar (unchanged from prior) ---------------- */
+let events = JSON.parse(localStorage.getItem('events')) || [];
+let currentMonth = new Date().getMonth();
+let currentYear = new Date().getFullYear();
+
+function updateCalendar() {
+  const daysDiv = document.getElementById('calendar-days');
+  const header = document.getElementById('calendar-header');
+
+  const firstDay = new Date(currentYear, currentMonth, 1);
+  const lastDay = new Date(currentYear, currentMonth + 1, 0);
+  const numDays = lastDay.getDate();
+  const startDay = firstDay.getDay();
+
+  daysDiv.innerHTML = '';
+  header.innerHTML = `
+    <button onclick="changeMonth(-1)">Prev</button>
+    <span>${firstDay.toLocaleString('default', { month: 'long' })} ${currentYear}</span>
+    <button onclick="changeMonth(1)">Next</button>
+  `;
+
+  ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(d => {
+    let div = document.createElement('div');
+    div.classList.add('day-name');
+    div.textContent = d;
+    daysDiv.appendChild(div);
+  });
+
+  for (let i = 0; i < startDay; i++) { daysDiv.appendChild(document.createElement('div')); }
+
+  for (let i = 1; i <= numDays; i++) {
+    const d = new Date(currentYear, currentMonth, i);
+    const div = document.createElement('div');
+    div.textContent = i;
+    div.onclick = () => displayEventsForDate(d);
+    daysDiv.appendChild(div);
+  }
+}
+
+function changeMonth(step) {
+  currentMonth += step;
+  if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+  if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+  addNHSTutoringWednesdays();
+  updateCalendar();
+}
+
+function addToCalendar(e) {
+  e.preventDefault();
+  let name = document.getElementById('event-name').value;
+  let date = document.getElementById('event-date').value;
+  let time = document.getElementById('event-time').value;
+  let duration = document.getElementById('event-duration').value;
+
+  events.push({ name, date, time, duration });
+  localStorage.setItem('events', JSON.stringify(events));
+  updateCalendar();
+  alert("Event added!");
+}
+
+function displayEventsForDate(dateObj) {
+  const dateStr = dateObj.toISOString().split("T")[0];
+  const list = events.filter(ev => ev.date === dateStr);
+
+  const box = document.getElementById('events-for-date');
+  box.innerHTML = `<h3>Events for ${dateStr}</h3>`;
+
+  if (!list.length) {
+    box.innerHTML += "<p>No events.</p>";
+    return;
+  }
+
+  const ul = document.createElement('ul');
+  list.forEach(ev => {
+    let li = document.createElement('li');
+    li.textContent = `${ev.name} — ${ev.time} (${ev.duration} hr)`;
+    ul.appendChild(li);
+  });
+  box.appendChild(ul);
+}
+
+// NHS Tutoring (unchanged)
+function addNHSTutoringWednesdays() {
+  const now = new Date(currentYear, currentMonth, 1);
+  const year = now.getFullYear();
+  const month = now.getMonth();
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  events = events.filter(ev => !(ev.name === "NHS Tutoring" && new Date(ev.date).getDay() === 4));
+
+  for (let i = 1; i <= daysInMonth; i++) {
+    const d = new Date(year, month, i);
+    if (d.getDay() === 3) {
+      const dateStr = d.toISOString().split("T")[0];
+      const exists = events.some(ev => ev.date === dateStr && ev.name === "NHS Tutoring");
+      if (!exists) {
+        events.push({ name: "NHS Tutoring", date: dateStr, time: "14:40", duration: 1 });
+      }
+    }
+  }
+  localStorage.setItem("events", JSON.stringify(events));
+}
+
+/* ---------------- Resource clicks increment progress ---------------- */
+function setupResourceClicks(){
+  document.querySelectorAll('.resource a, .resource .download').forEach(el => {
+    el.addEventListener('click', function (e) {
+      // if link to PDF or video clicked, increment subject progress by resource amount
+      const parentTab = this.closest('.resource-content').id;
+      incrementProgressByResource(parentTab);
+      // note: do not prevent default — allow navigation
+    });
+  });
+}
+
+/* ---------------- Init everything ---------------- */
+function initApp(){
+  initTheme();
+  calcResourceCounts();
+  renderAchievementsUI();
+  // set initial fills (without animation)
+  document.getElementById('math-progress').style.width = progressValues.math + '%';
+  document.getElementById('science-progress').style.width = progressValues.science + '%';
+  document.getElementById('reading-progress').style.width = progressValues.reading + '%';
+
+  // quiz setups
+  setupQuiz('form-quiz-math', 'math', 'result-quiz-math');
+  setupQuiz('form-quiz-science', 'science', 'result-quiz-science');
+  setupQuiz('form-quiz-reading', 'reading', 'result-quiz-reading');
+
+  // resource click behavior
+  setupResourceClicks();
+
+  addNHSTutoringWednesdays();
+  updateCalendar();
+}
+
+// wire up resource tabs
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.res-tab').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      document.querySelectorAll('.res-tab').forEach(x => x.classList.remove('active'));
+      e.currentTarget.classList.add('active');
+      document.querySelectorAll('.resource-content').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(btn.dataset.sub).classList.add('active');
+    });
+  });
+  initApp();
+});
+</script>
+</body>
+</html>

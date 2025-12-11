@@ -1,0 +1,152 @@
+/* --- Theme variables (dark = default) --- */
+:root{
+  --bg: #001F3F;
+  --bg-2: #001a50; /* gradient second stop */
+  --card: #002A5C;
+  --muted: #A5B5C5;
+  --text: #e6eef6;
+  --accent: #00A651;
+  --accent-contrast: #ffffff;
+  --glass: rgba(255,255,255,0.05);
+  --day-bg: #82fc7e;
+  --calendar-text: #ffffff;
+  --resource-bg: rgba(255,255,255,0.03);
+  --button-bg: var(--accent);
+}
+
+/* --- Light mode overrides --- */
+body.light-mode {
+  --bg: #f5f7fb;
+  --bg-2: #e9eef6;
+  --card: #ffffff;
+  --muted: #55606a;
+  --text: #0b1b2b;
+  --accent: #00703c;
+  --accent-contrast: #ffffff;
+  --glass: rgba(11,27,43,0.03);
+  --day-bg: #d6f6d8;
+  --calendar-text: #07202a;
+  --resource-bg: rgba(11,27,43,0.02);
+  --button-bg: var(--accent);
+}
+
+/* --- Base layout --- */
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif;}
+html,body{height:100%;}
+body{
+  background: linear-gradient(180deg,var(--bg),var(--bg-2));
+  color:var(--text);
+  padding:24px;
+  display:flex;
+  justify-content:center;
+  transition: background 300ms ease, color 300ms ease;
+}
+.container{max-width:1200px;width:100%;}
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.logo-area{display:flex;align-items:center;gap:10px;}
+.logo-area img{width:60px;height:60px;border-radius:10px;}
+h1{font-size:24px;margin:0;}
+nav{display:flex;gap:10px;align-items:center;}
+button{background:var(--button-bg);color:var(--accent-contrast);border:none;padding:10px 16px;border-radius:8px;font-weight:600;cursor:pointer;transition:background 0.2s;}
+button:hover{filter:brightness(0.95);}
+
+/* Theme toggle switch */
+.theme-toggle {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+/* Switch styling */
+.switch {
+  --w:46px;
+  --h:26px;
+  position:relative;
+  width:var(--w);
+  height:var(--h);
+  background: rgba(255,255,255,0.12);
+  border-radius:999px;
+  padding:3px;
+  cursor:pointer;
+  transition:background 200ms ease;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.15);
+}
+.switch .knob{
+  width:calc(var(--h) - 6px);
+  height:calc(var(--h) - 6px);
+  background:var(--card);
+  border-radius:50%;
+  transform:translateX(0);
+  transition: transform 220ms cubic-bezier(.2,.9,.2,1), background 200ms;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+}
+.switch.on { background: var(--accent); }
+.switch.on .knob { transform: translateX(calc(var(--w) - var(--h))); background: var(--accent-contrast); }
+
+/* Tabs & cards */
+.tab-content{display:none;}
+.tab-content.active{display:block;}
+.card{background:var(--card);border-radius:12px;padding:20px;margin-bottom:20px;box-shadow:0 6px 18px rgba(2,6,23,0.35);transition:background 200ms;}
+h2{color:var(--accent);margin-bottom:12px;}
+.progress-bar{width:100%;background:#ccc;border-radius:8px;overflow:hidden;height:16px;margin-top:8px;}
+.progress-fill{height:100%;width:0%;background:var(--accent);transition:width 600ms cubic-bezier(.2,.9,.2,1);}
+
+/* small 'bump' animation for progress updates */
+.progress-fill.bump{ animation: bumpScale 420ms ease; transform-origin: left center; }
+@keyframes bumpScale {
+  0% { transform: scaleY(1); }
+  30% { transform: scaleY(1.12); }
+  100% { transform: scaleY(1); }
+}
+
+.resource-tabs{display:flex;gap:10px;margin-bottom:12px;}
+.resource-tabs button{background:transparent;border:2px solid var(--accent);color:var(--accent);font-weight:600;padding:8px 12px;border-radius:8px;cursor:pointer;}
+.resource-tabs button.active{background:var(--accent);color:var(--accent-contrast);}
+.resource-content{display:none;}
+.resource-content.active{display:block;}
+.resource-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;}
+.resource{background:var(--resource-bg);padding:16px;border-radius:10px;border:1px solid rgba(0,0,0,0.06);}
+.resource h4{margin-bottom:8px;color:var(--text);}
+a.download{color:var(--accent);text-decoration:none;font-weight:600;}
+
+/* small utility buttons */
+.small{padding:6px 10px;font-size:13px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);cursor:pointer;}
+.subject-quiz-buttons{margin-bottom:12px;display:flex;gap:8px;}
+
+/* Achievements */
+.achievements-card{margin-left:20px;min-width:220px;}
+.achievements{display:flex;flex-direction:column;gap:8px;}
+.badge{display:flex;gap:10px;align-items:center;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02);opacity:0.45;transition:all 300ms;}
+.badge.earned{opacity:1;box-shadow:0 6px 18px rgba(0,0,0,0.25);transform:translateY(-4px);}
+.badge-icon{width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,var(--accent),#00703c);display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:18px;}
+.badge-text .badge-desc{font-size:12px;color:var(--muted);}
+
+/* calendar */
+#calendar {margin-top:30px;background: var(--card);padding:15px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.2);}
+#calendar-header{display:flex;justify-content:space-between;margin-bottom:10px;align-items:center;}
+#calendar-header button{background-color:var(--accent);color:var(--accent-contrast);border:none;padding:8px 10px;cursor:pointer;border-radius:8px;}
+#calendar-days{display:grid;grid-template-columns:repeat(7,1fr);grid-gap:10px;margin-top:20px;}
+#calendar-days div{min-height:48px;text-align:center;padding:8px;background-color:var(--day-bg);cursor:pointer;border-radius:6px;transition:background-color 0.3s;color:var(--calendar-text);}
+#calendar-days div:hover{background-color:var(--accent);color:var(--accent-contrast);}
+#calendar-days div.selected{background-color:var(--accent);color:var(--accent-contrast);}
+#calendar-days .day-name{font-weight:bold;color:var(--accent);}
+#events-for-date{margin-top:20px;}
+#events-for-date ul{list-style-type:none;padding:0;}
+#events-for-date li{background:var(--resource-bg);color:var(--text);padding:10px;margin:5px 0;border-radius:4px;}
+
+/* forms & quiz layout */
+.quiz-form ol{padding-left:18px;}
+.quiz-result{margin-top:12px;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px;}
+form input, form select, form button{width:100%;padding:10px;margin-top:8px;border-radius:6px;border:none;font-size:14px;}
+form button{background:var(--accent);color:var(--accent-contrast);cursor:pointer;border-radius:8px;padding:10px;}
+form button:hover{filter:brightness(0.95);}
+
+/* small responsiveness */
+@media (max-width:900px){
+  .achievements-card{margin-left:0;margin-top:12px;min-width:0;}
+  .dashboard-row{display:flex;flex-direction:column;gap:12px;}
+}
+@media (max-width:640px){
+  .logo-area img{width:48px;height:48px;}
+  header{flex-direction:column;align-items:flex-start;gap:12px;}
+  nav{width:100%;justify-content:space-between;}
+}
